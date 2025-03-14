@@ -1,0 +1,42 @@
+<!-- pages/alert/add.wxml -->
+<view class="container">
+  <view class="header">
+    <view class="title">设置价格提醒</view>
+  </view>
+  
+  <view class="alert-form card">
+    <view class="form-item">
+      <view class="form-label">ETF名称</view>
+      <view class="form-value">{{etfName}} ({{etfCode}})</view>
+    </view>
+    
+    <view class="form-item">
+      <view class="form-label">当前价格</view>
+      <view class="form-value">{{currentPrice || '--'}}</view>
+    </view>
+    
+    <view class="form-item">
+      <view class="form-label">提醒条件</view>
+      <view class="form-value">
+        <radio-group class="condition-group" bindchange="onConditionChange">
+          <label class="condition-item" wx:for="{{conditions}}" wx:key="value">
+            <radio value="{{item.value}}" checked="{{condition === item.value}}" color="#1E88E5" />
+            <text>{{item.label}}</text>
+          </label>
+        </radio-group>
+      </view>
+    </view>
+    
+    <view class="form-item">
+      <view class="form-label">提醒价格</view>
+      <view class="form-value">
+        <input class="price-input" type="digit" value="{{inputPrice}}" bindinput="onPriceInput" placeholder="请输入价格" />
+      </view>
+    </view>
+  </view>
+  
+  <view class="btn-group">
+    <button class="btn-cancel" bindtap="cancel">取消</button>
+    <button class="btn-save" bindtap="saveAlert">保存</button>
+  </view>
+</view>

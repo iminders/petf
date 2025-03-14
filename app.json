@@ -1,0 +1,56 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/detail/detail",
+    "pages/favorite/favorite",
+    "pages/alert/alert",
+    "pages/news/news",
+    "pages/settings/settings"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1E88E5",
+    "navigationBarTitleText": "PETF - A股ETF行情",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#1E88E5",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "行情",
+        "iconPath": "images/market.png",
+        "selectedIconPath": "images/market_selected.png"
+      },
+      {
+        "pagePath": "pages/favorite/favorite",
+        "text": "自选",
+        "iconPath": "images/favorite.png",
+        "selectedIconPath": "images/favorite_selected.png"
+      },
+      {
+        "pagePath": "pages/alert/alert",
+        "text": "提醒",
+        "iconPath": "images/alert.png",
+        "selectedIconPath": "images/alert_selected.png"
+      },
+      {
+        "pagePath": "pages/news/news",
+        "text": "资讯",
+        "iconPath": "images/news.png",
+        "selectedIconPath": "images/news_selected.png"
+      },
+      {
+        "pagePath": "pages/settings/settings",
+        "text": "设置",
+        "iconPath": "images/settings.png",
+        "selectedIconPath": "images/settings_selected.png"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

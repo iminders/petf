@@ -1,0 +1,88 @@
+/**app.wxss**/
+page {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #f5f5f5;
+  box-sizing: border-box;
+}
+
+.container {
+  padding: 20rpx;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 8rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.price-up {
+  color: #f44336;
+}
+
+.price-down {
+  color: #4caf50;
+}
+
+.price-equal {
+  color: #757575;
+}
+
+.btn-primary {
+  background-color: #1E88E5;
+  color: #fff;
+  border: none;
+  border-radius: 4rpx;
+  padding: 16rpx 32rpx;
+  font-size: 28rpx;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #1E88E5;
+  border: 1rpx solid #1E88E5;
+  border-radius: 4rpx;
+  padding: 16rpx 32rpx;
+  font-size: 28rpx;
+}
+
+.text-small {
+  font-size: 24rpx;
+  color: #757575;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-10 {
+  margin-top: 10rpx;
+}
+
+.mb-10 {
+  margin-bottom: 10rpx;
+}

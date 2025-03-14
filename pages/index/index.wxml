@@ -1,0 +1,49 @@
+<!-- pages/index/index.wxml -->
+<view class="container">
+  <view class="header">
+    <view class="title">ETF行情</view>
+    <view class="refresh-btn" bindtap="onRefresh">
+      <text class="{{refreshing ? 'refreshing' : ''}}">刷新</text>
+    </view>
+  </view>
+  
+  <view class="update-time" wx:if="{{lastUpdateTime}}">
+    最后更新：{{lastUpdateTime}}
+  </view>
+  
+  <view class="etf-list">
+    <view class="etf-item card" wx:for="{{etfList}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+      <view class="etf-info">
+        <view class="etf-name">{{item.name}}</view>
+        <view class="etf-code">{{item.code}}</view>
+      </view>
+      
+      <view class="etf-price">
+        <view class="current-price {{item.change ? (item.change > 0 ? 'price-up' : 'price-down') : ''}}">
+          {{item.price || '--'}}
+        </view>
+        <view class="price-change">
+          <text class="{{item.change ? (item.change > 0 ? 'price-up' : 'price-down') : ''}}">
+            {{item.change ? (item.change > 0 ? '+' : '') + item.change : '--'}}
+          </text>
+          <text class="{{item.changePercent ? (item.changePercent > 0 ? 'price-up' : 'price-down') : ''}}">
+            {{item.changePercent ? (item.changePercent > 0 ? '+' : '') + item.changePercent + '%' : '--'}}
+          </text>
+        </view>
+      </view>
+      
+      <view class="favorite-btn" catchtap="toggleFavorite" data-id="{{item.id}}">
+        <image src="{{item.isFavorite ? '../../images/star_filled.png' : '../../images/star_empty.png'}}"></image>
+      </view>
+    </view>
+  </view>
+  
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <view class="loading-text">加载中...</view>
+  </view>
+  
+  <view class="empty-tip" wx:if="{{!loading && etfList.length === 0}}">
+    暂无数据
+  </view>
+</view>

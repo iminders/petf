@@ -1,0 +1,61 @@
+<!-- pages/settings/settings.wxml -->
+<view class="container">
+  <view class="header">
+    <view class="title">设置</view>
+  </view>
+  
+  <view class="settings-group card">
+    <view class="settings-title">基本设置</view>
+    
+    <view class="settings-item">
+      <view class="settings-label">主题</view>
+      <view class="settings-value">
+        <picker bindchange="onThemeChange" value="{{themeIndex}}" range="{{themes}}" range-key="label">
+          <view class="picker">
+            {{currentThemeLabel}}
+            <text class="arrow">></text>
+          </view>
+        </picker>
+      </view>
+    </view>
+    
+    <view class="settings-item">
+      <view class="settings-label">刷新频率</view>
+      <view class="settings-value">
+        <picker bindchange="onRefreshIntervalChange" value="{{refreshIntervalIndex}}" range="{{refreshIntervals}}" range-key="label">
+          <view class="picker">
+            {{currentRefreshIntervalLabel}}
+            <text class="arrow">></text>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+  
+  <view class="settings-group card">
+    <view class="settings-title">其他</view>
+    
+    <view class="settings-item" bindtap="clearCache">
+      <view class="settings-label">清除缓存</view>
+      <view class="settings-value">
+        <text class="arrow">></text>
+      </view>
+    </view>
+    
+    <view class="settings-item" bindtap="about">
+      <view class="settings-label">关于我们</view>
+      <view class="settings-value">
+        <text class="arrow">></text>
+      </view>
+    </view>
+    
+    <view class="settings-item" bindtap="contact">
+      <view class="settings-label">联系我们</view>
+      <view class="settings-value">
+        <text class="arrow">></text>
+      </view>
+    </view>
+  </view>
+  
+  <view class="version">版本 1.0.0</view>
+</view>

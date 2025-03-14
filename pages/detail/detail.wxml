@@ -1,0 +1,141 @@
+<!-- pages/detail/detail.wxml -->
+<view class="container">
+  <!-- ETF基本信息卡片 -->
+  <view class="etf-card card">
+    <view class="etf-header">
+      <view class="etf-title">
+        <view class="etf-name">{{etf.name}}</view>
+        <view class="etf-code">{{etf.code}}</view>
+      </view>
+      <view class="action-btns">
+        <view class="action-btn" bindtap="toggleFavorite">
+          <image src="{{isFavorite ? '../../images/star_filled.png' : '../../images/star_empty.png'}}"></image>
+        </view>
+        <view class="action-btn" bindtap="refreshPrice">
+          <image src="../../images/refresh.png"></image>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 在价格信息部分添加更新时间显示 -->
+    <view class="price-info">
+      <view class="current-price {{etf.change ? (etf.change > 0 ? 'price-up' : 'price-down') : ''}}">
+        {{etf.price || '--'}}
+      </view>
+      <view class="price-change">
+        <text class="{{etf.change ? (etf.change > 0 ? 'price-up' : 'price-down') : ''}}">
+          {{etf.change ? (etf.change > 0 ? '+' : '') + etf.change : '--'}}
+        </text>
+        <text class="{{etf.changePercent ? (etf.changePercent > 0 ? 'price-up' : 'price-down') : ''}}">
+          {{etf.changePercent ? (etf.changePercent > 0 ? '+' : '') + etf.changePercent + '%' : '--'}}
+        </text>
+      </view>
+      <view class="update-time" wx:if="{{updateTime}}">更新时间: {{updateTime}}</view>
+    </view>
+    
+    <view class="trading-info">
+      <view class="info-item">
+        <view class="info-label">今开</view>
+        <view class="info-value">{{etf.open || '--'}}</view>
+      </view>
+      <view class="info-item">
+        <view class="info-label">昨收</view>
+        <view class="info-value">{{etf.prevClose || '--'}}</view>
+      </view>
+      <view class="info-item">
+        <view class="info-label">最高</view>
+        <view class="info-value">{{etf.high || '--'}}</view>
+      </view>
+      <view class="info-item">
+        <view class="info-label">最低</view>
+        <view class="info-value">{{etf.low || '--'}}</view>
+      </view>
+      <view class="info-item">
+        <view class="info-label">成交量</view>
+        <view class="info-value">{{etf.volumeDisplay}}</view>
+      </view>
+      <view class="info-item">
+        <view class="info-label">成交额</view>
+        <view class="info-value">{{etf.amountDisplay}}</view>
+      </view>
+    </view>
+    
+    <view class="alert-btn" bindtap="addPriceAlert">
+      <image src="../../images/alert.png"></image>
+      <text>设置价格提醒</text>
+    </view>
+  </view>
+  
+  <!-- 选项卡 -->
+  <view class="tabs">
+    <view class="tab {{currentTab === 'chart' ? 'active' : ''}}" bindtap="switchTab" data-tab="chart">走势图</view>
+    <view class="tab {{currentTab === 'info' ? 'active' : ''}}" bindtap="switchTab" data-tab="info">基本信息</view>
+  </view>
+  
+  <!-- 图表内容 -->
+  <view class="chart-container" wx:if="{{currentTab === 'chart'}}">
+    <view class="chart-period">
+      <view class="period-item {{chartPeriod === 'day' ? 'active' : ''}}" bindtap="switchChartPeriod" data-period="day">日K</view>
+      <view class="period-item {{chartPeriod === 'week' ? 'active' : ''}}" bindtap="switchChartPeriod" data-period="week">周K</view>
+      <view class="period-item {{chartPeriod === 'month' ? 'active' : ''}}" bindtap="switchChartPeriod" data-period="month">月K</view>
+      <view class="period-item {{chartPeriod === 'year' ? 'active' : ''}}" bindtap="switchChartPeriod" data-period="year">年K</view>
+    </view>
+    
+    <view class="chart-wrapper">
+      <canvas type="2d" id="chart-canvas" class="chart-canvas"></canvas>
+      <view class="loading-overlay" wx:if="{{chartLoading}}">
+        <view class="loading-spinner"></view>
+        <view class="loading-text">加载中...</view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 基本信息内容 -->
+  <view class="tab-content" wx:if="{{currentTab === 'info'}}">
+    <view class="loading" wx:if="{{basicInfoLoading}}">
+      <view class="loading-spinner"></view>
+      <view class="loading-text">加载中...</view>
+    </view>
+    <view class="basic-info card" wx:else>
+      <view class="info-row">
+        <view class="info-label">全称</view>
+        <view class="info-value">{{basicInfo.fullName}}</view>
+      </view>
+      <view class="info-row">
+        <view class="info-label">基金管理人</view>
+        <view class="info-value">{{basicInfo.manager}}</view>
+      </view>
+      <view class="info-row">
+        <view class="info-label">成立日期</view>
+        <view class="info-value">{{basicInfo.establishDate}}</view>
+      </view>
+      <view class="info-row">
+        <view class="info-label">基金规模</view>
+        <view class="info-value">{{basicInfo.scale}}</view>
+      </view>
+      <view class="info-row">
+        <view class="info-label">管理费率</view>
+        <view class="info-value">{{basicInfo.managementFee}}</view>
+      </view>
+      <view class="info-row">
+        <view class="info-label">跟踪误差</view>
+        <view class="info-value">{{basicInfo.trackingError}}</view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 价格提醒列表 -->
+  <view class="alerts-section" wx:if="{{priceAlerts.length > 0}}">
+    <view class="section-title">价格提醒</view>
+    <view class="alerts-list">
+      <view class="alert-item card" wx:for="{{priceAlerts}}" wx:key="id">
+        <view class="alert-condition">
+          当价格{{item.condition === 'above' ? '高于' : '低于'}} {{item.price}}
+        </view>
+        <view class="alert-status">
+          <text class="{{item.active ? 'active' : 'inactive'}}">{{item.active ? '已启用' : '已禁用'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

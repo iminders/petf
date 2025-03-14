@@ -1,0 +1,61 @@
+/* pages/settings/settings.wxss */
+.header {
+  padding: 20rpx;
+  background-color: #fff;
+  border-bottom: 1rpx solid #eee;
+  margin-bottom: 20rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.settings-group {
+  margin-bottom: 20rpx;
+}
+
+.settings-title {
+  font-size: 28rpx;
+  color: #666;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.settings-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.settings-item:last-child {
+  border-bottom: none;
+}
+
+.settings-label {
+  font-size: 28rpx;
+}
+
+.settings-value {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.picker {
+  display: flex;
+  align-items: center;
+}
+
+.arrow {
+  margin-left: 10rpx;
+  color: #999;
+}
+
+.version {
+  text-align: center;
+  font-size: 24rpx;
+  color: #999;
+  padding: 40rpx 0;
+}

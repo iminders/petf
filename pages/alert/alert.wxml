@@ -1,0 +1,48 @@
+<!-- pages/alert/alert.wxml -->
+<view class="container">
+  <view class="header">
+    <view class="title">价格提醒</view>
+    <view class="add-btn" bindtap="addAlert">
+      <image src="../../images/add.png"></image>
+    </view>
+  </view>
+  
+  <view class="alert-list" wx:if="{{!isEmpty}}">
+    <view class="alert-item card" wx:for="{{alerts}}" wx:key="id">
+      <view class="alert-content" bindtap="goToDetail" data-id="{{item.etfId}}">
+        <view class="etf-info">
+          <view class="etf-name">{{item.etf.name}}</view>
+          <view class="etf-code">{{item.etf.code}}</view>
+        </view>
+        
+        <view class="alert-info">
+          <view class="alert-condition">
+            当价格{{item.condition === 'above' ? '高于' : '低于'}}
+            <text class="alert-price">{{item.price}}</text>
+          </view>
+          <view class="alert-time">创建时间: {{item.createTime}}</view>
+        </view>
+      </view>
+      
+      <view class="alert-actions">
+        <view class="action-btn status-btn {{item.active ? 'active' : 'inactive'}}" catchtap="toggleAlertStatus" data-id="{{item.id}}">
+          {{item.active ? '已启用' : '已禁用'}}
+        </view>
+        <view class="action-btn delete-btn" catchtap="deleteAlert" data-id="{{item.id}}">
+          <image src="../../images/delete.png"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="empty-tip" wx:if="{{isEmpty}}">
+    <image src="../../images/empty_alert.png"></image>
+    <view class="empty-text">您还没有设置价格提醒</view>
+    <view class="add-alert-btn" bindtap="addAlert">添加提醒</view>
+  </view>
+  
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <view class="loading-text">加载中...</view>
+  </view>
+</view>
