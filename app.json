@@ -4,7 +4,6 @@
     "pages/detail/detail",
     "pages/favorite/favorite",
     "pages/alert/alert",
-    "pages/news/news",
     "pages/settings/settings"
   ],
   "window": {
@@ -36,12 +35,6 @@
         "text": "提醒",
         "iconPath": "images/alert.png",
         "selectedIconPath": "images/alert_selected.png"
-      },
-      {
-        "pagePath": "pages/news/news",
-        "text": "资讯",
-        "iconPath": "images/news.png",
-        "selectedIconPath": "images/news_selected.png"
       },
       {
         "pagePath": "pages/settings/settings",

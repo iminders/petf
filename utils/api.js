@@ -204,36 +204,11 @@ function getETFInfo(code) {
   });
 }
 
-// 获取ETF相关资讯
-function getETFNews(page = 1, pageSize = 10) {
-  return new Promise((resolve, reject) => {
-    // 这里使用模拟数据，实际项目中应该使用真实API
-    setTimeout(() => {
-      const news = [];
-      for (let i = 0; i < pageSize; i++) {
-        news.push({
-          id: `news_${page}_${i}`,
-          title: `ETF市场最新动态分析 ${page}-${i}`,
-          summary: '随着市场波动加剧，ETF投资策略需要更加灵活...',
-          source: '财经网',
-          publishTime: '2023-05-15 08:30',
-          url: 'https://example.com/news/1'
-        });
-      }
-      resolve({
-        list: news,
-        total: 100,
-        page: page,
-        pageSize: pageSize
-      });
-    }, 500);
-  });
-}
 
 module.exports = {
   getETFPrice,
   getBatchETFPrices,
   getETFHistory,
-  getETFInfo,
-  getETFNews
+  getETFInfo
+  // 从导出中移除 getETFNews
 };
